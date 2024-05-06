@@ -1,5 +1,5 @@
+using MenuApiData;
 using Microsoft.EntityFrameworkCore;
-using UsersApiData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 var configuration = builder.Configuration;
 
-builder.Services.AddDbContext<UserContext>(options =>
+builder.Services.AddDbContext<MenuContext>(options =>
 	options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();

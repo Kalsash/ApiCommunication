@@ -1,0 +1,28 @@
+0) cd projectFolder
+
+For docker compose:
+1) docker compose up -d db
+# sometimes needed 
+# docker compose down -v
+2) docker compose build 
+3) docker compose up csharpapp
+4) http://localhost:8080/api/users/test
+#Postman
+5) http://localhost:8080/api/users
+You are the best!
+
+Some help commands in exec:
+1) docker exec -it db psql -U postgres 
+2) \dt 
+3) DROP TABLE users;
+
+
+For Kubernetes:
+1) docker build -t kalsash/menuapi:1.0 .
+2) kubectl apply -f api.yaml
+3) kubectl apply -f postgres.yaml
+4)kubectl port-forward service/csharpapp 8080:8080
+
+Some help commands: 
+1) kubectl get deployments
+2) kubectl delete --all deployments
