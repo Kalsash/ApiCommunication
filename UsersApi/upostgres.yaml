@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: db
+  name: userdb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: db
+      app: userdb
   template:
     metadata:
       labels:
-        app: db
+        app: userdb
     spec:
       containers:
-      - name: db
+      - name: userdb
         image: postgres:12
         ports:
         - containerPort: 5432
@@ -31,10 +31,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: db
+  name: userdb
 spec:
   selector:
-    app: db
+    app: userdb
   ports:
   - protocol: TCP
     port: 5432

@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: csharpapp
+  name: menuapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: csharpapp
+      app: menuapp
   template:
     metadata:
       labels:
-        app: csharpapp
+        app: menuapp
     spec:
       containers:
-      - name: csharpapp
+      - name: menuapp
         image: kalsash/menuapi:1.0
         ports:
         - containerPort: 8080
         env:
         - name: ConnectionStrings__DefaultConnection
-          value: "Host=db;Database=users;Username=postgres;Password=postgres"
+          value: "Host=db;Database=menu;Username=postgres;Password=postgres"
       volumes:
       - name: pgdata
         emptyDir: {}
@@ -27,10 +27,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: csharpapp
+  name: menuapp
 spec:
   selector:
-    app: csharpapp
+    app: menuapp
   ports:
   - protocol: TCP
     port: 8080

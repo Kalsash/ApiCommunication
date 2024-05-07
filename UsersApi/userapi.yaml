@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: csharpapp
+  name: userapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: csharpapp
+      app: userapp
   template:
     metadata:
       labels:
-        app: csharpapp
+        app: userapp
     spec:
       containers:
-      - name: csharpapp
+      - name: userapp
         image: kalsash/usersapi:1.0
         ports:
         - containerPort: 8080
         env:
         - name: ConnectionStrings__DefaultConnection
-          value: "Host=db;Database=users;Username=postgres;Password=postgres"
+          value: "Host=userdb;Database=users;Username=postgres;Password=postgres"
       volumes:
       - name: pgdata
         emptyDir: {}
@@ -27,10 +27,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: csharpapp
+  name: userapp
 spec:
   selector:
-    app: csharpapp
+    app: userapp
   ports:
   - protocol: TCP
     port: 8080

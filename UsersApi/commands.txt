@@ -19,9 +19,9 @@ Some help commands in exec:
 
 For Kubernetes:
 1) docker build -t kalsash/usersapi:1.0 .
-2) kubectl apply -f api.yaml
-3) kubectl apply -f postgres.yaml
-4)kubectl port-forward service/csharpapp 8080:8080
+2) kubectl apply -f userapi.yaml
+3) kubectl apply -f upostgres.yaml
+4)kubectl port-forward service/userapp 8080:8080
 
 Some help commands: 
 1) kubectl get deployments
