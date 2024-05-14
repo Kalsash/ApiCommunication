@@ -1,0 +1,46 @@
+syntax = "proto3";
+ 
+package crud;
+ 
+import "google/protobuf/empty.proto";
+ 
+service UserService{
+ 
+  rpc ListUsers(google.protobuf.Empty) returns (ListReply);
+  rpc GetUser(GetUserRequest) returns (UserReply);
+  rpc CreateUser(CreateUserRequest) returns (UserReply);
+  rpc UpdateUser(UpdateUserRequest) returns (UserReply);
+  rpc DeleteUser(DeleteUserRequest) returns (UserReply);
+}
+ 
+message CreateUserRequest{
+  string name=1;
+  string phone = 2;
+  string address = 3;
+}
+ 
+message GetUserRequest{
+  int32 id =1;
+}
+ 
+message UpdateUserRequest{
+  int32 id=1;
+  string name=2;
+  string phone = 3;
+  string address = 4;
+}
+ 
+message DeleteUserRequest{
+  int32 id =1;
+}
+ 
+message ListReply{
+  repeated UserReply Users = 1;
+}
+ 
+message UserReply{
+  int32 id = 1;
+  string name=2;
+  string phone = 3;
+  string address = 4;
+}
