@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: menuapp
-        image: kalsash/menuapi:1.0
+        image: menuapi:1.0
         ports:
         - containerPort: 8080
         env:

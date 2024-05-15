@@ -18,7 +18,7 @@ Some help commands in exec:
 
 
 For Kubernetes:
-1) docker build -t kalsash/menuapi:1.0 .
+1) docker build -t menuapi:1.0 .
 2) kubectl apply -f api.yaml
 3) kubectl apply -f postgres.yaml
 4)kubectl port-forward service/menuapp 8080:8080

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: userapp
-        image: kalsash/usersapi:1.0
+        image: usersapi:1.0
         ports:
         - containerPort: 8080
         env:
