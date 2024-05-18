@@ -1,7 +1,13 @@
 ﻿<h1 class="text-center">Dishes list</h1>
-@foreach (Dish d in ViewBag.DishList)
-{
-    ViewBag.shoppingCart.Add(d);
-    <p>@d.Name ....................................................................... @d.Price rub.</p> 
-}
+
+
+
+<form method="post" asp-controller="Home" asp-action="Menu" style="margin-bottom: 20px">
+    @foreach (Dish d in ViewBag.DishList)
+    {
+
+        ViewBag.Dish = d;
+        <p>@d.Name ....................................................................... @d.Price rub. <input type="submit" value="Добавить" /> </p>
+    }
+						</form>
 
