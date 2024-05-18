@@ -18,6 +18,9 @@ namespace Web_Client.Controllers
             _logger = logger;
         }
         public static List<Dish> shoppingCart = new List<Dish>();
+		public static Dish myDish = new Dish();
+
+        public static List<Dish> Dishes = new List<Dish>(); 
 
 
         public IActionResult Index()
@@ -50,12 +53,6 @@ namespace Web_Client.Controllers
             return shoppingCart.ToList();
         }
 
-        [HttpPost("/Home/Menu")]
-        public IActionResult Menu(int x)
-        {
-            shoppingCart.Add(ViewBag.Dish);
-            return View();
-        }
 
         [HttpGet]
         public IActionResult Menu()
@@ -63,12 +60,28 @@ namespace Web_Client.Controllers
             var MenuRespone = MenuTest();
             var DishList = MenuRespone.Result;
             ViewBag.DishList = DishList;
+            Dishes = DishList;
             ViewBag.shoppingCart = shoppingCart;
-            ViewBag.Dish = new Dish();
+            ViewBag.Dish = myDish;
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		[HttpPost("/Home/Test")]
+		public IActionResult Test(List<int> selectedDishes)
+		{
+            foreach (var item in Dishes)
+            {
+                if (selectedDishes.Contains(item.Id))
+                {
+                    shoppingCart.Add(item);
+                }
+            }
+			
+			//return View();
+			return RedirectToAction("Menu", "Home");
+		}
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -2,12 +2,12 @@
 
 
 
-<form method="post" asp-controller="Home" asp-action="Menu" style="margin-bottom: 20px">
+<form method="post" asp-controller="Home" asp-action="Test" style="margin-bottom: 20px">
     @foreach (Dish d in ViewBag.DishList)
     {
-
-        ViewBag.Dish = d;
-        <p>@d.Name ....................................................................... @d.Price rub. <input type="submit" value="Добавить" /> </p>
+        <p>
+            <input type="checkbox" name="selectedDishes" value="@d.Id" /> @d.Name ....................................................................... @d.Price rub.
+        </p>
     }
-						</form>
-
+    <input type="submit" value="Добавить выбранные блюда в корзину" />
+</form>
