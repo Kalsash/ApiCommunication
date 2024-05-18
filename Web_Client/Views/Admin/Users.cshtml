@@ -1,0 +1,11 @@
+﻿<h1>Список покупателей</h1>
+
+@foreach (Users u in ViewBag.Users)
+{
+    <h3>
+        @u.Id
+        @u.Name
+        @u.Phone
+        @u.Address
+    </h3>
+}

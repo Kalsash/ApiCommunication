@@ -16,16 +16,14 @@ namespace Web_Client.Controllers
         {
             _logger = logger;
         }
+        public static List<Dish> shoppingCart = new List<Dish>();
+        
 
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
         async public Task<List<Dish>> MenuTest()
         {
             var url = "http://localhost:8080/api/menu";
@@ -45,14 +43,16 @@ namespace Web_Client.Controllers
             }
         }
 
+
         public IActionResult Menu()
         {
             var MenuRespone = MenuTest();
             var DishList = MenuRespone.Result;
             ViewBag.DishList = DishList;
-
+            ViewBag.shoppingCart = shoppingCart;
             return View();
         }
+
 
 
 

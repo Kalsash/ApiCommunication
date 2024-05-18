@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MenuApi", "MenuApi\MenuApi.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliveryApi", "DeliveryApi\DeliveryApi.csproj", "{A38BDBD0-E13C-4094-AD29-44B1CB4821EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_Client", "Web_Client\Web_Client.csproj", "{44F54AD5-8F35-4F3E-9956-027DEC794E93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web_Client", "Web_Client\Web_Client.csproj", "{44F54AD5-8F35-4F3E-9956-027DEC794E93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

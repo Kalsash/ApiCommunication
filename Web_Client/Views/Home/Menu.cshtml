@@ -1,5 +1,7 @@
 ﻿<h1 class="text-center">Dishes list</h1>
 @foreach (Dish d in ViewBag.DishList)
 {
+    ViewBag.shoppingCart.Add(d);
     <p>@d.Name ....................................................................... @d.Price rub.</p> 
 }
+
