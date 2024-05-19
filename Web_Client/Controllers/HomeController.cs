@@ -12,13 +12,17 @@ namespace Web_Client.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly CartRepository _cartRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, CartRepository cartRepository)
         {
             _logger = logger;
+            _cartRepository = cartRepository;
         }
-        public static List<Dish> shoppingCart = new List<Dish>();
-		public static Dish myDish = new Dish();
+
+
+        //public static List<Dish> shoppingCart = new List<Dish>();
 
         public static List<Dish> Dishes = new List<Dish>(); 
 
@@ -50,7 +54,7 @@ namespace Web_Client.Controllers
         //корзина покупок
         public List<Dish> Bag()
         {
-            return shoppingCart.ToList();
+            return _cartRepository.GetDishes().ToList();
         }
 
 
@@ -61,8 +65,7 @@ namespace Web_Client.Controllers
             var DishList = MenuRespone.Result;
             ViewBag.DishList = DishList;
             Dishes = DishList;
-            ViewBag.shoppingCart = shoppingCart;
-            ViewBag.Dish = myDish;
+            //ViewBag.shoppingCart = shoppingCart;
             return View();
         }
 
@@ -73,7 +76,7 @@ namespace Web_Client.Controllers
             {
                 if (selectedDishes.Contains(item.Id))
                 {
-                    shoppingCart.Add(item);
+                    _cartRepository.AddDish(item);
                 }
             }
 			

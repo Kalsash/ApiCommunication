@@ -1,9 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using Web_Client.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
+
+builder.Services.AddTransient<CartRepository>();
+
 var app = builder.Build();
+
+app.MapGet("/Cart", (ApplicationContext db) => db.ShoppingCart.ToList());
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
