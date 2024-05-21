@@ -15,8 +15,8 @@ namespace Web_Client.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Dish>().HasData(
-                    new Dish { Id = 3, Name = "Crab", Price = 2200 },
-                    new Dish { Id = 4, Name = "Octopus", Price = 1500 }
+                    new Dish { Id = 1, Name = "Crab", Price = 2200 },
+                    new Dish { Id = 2, Name = "Octopus", Price = 1500 }
                     );               
         }
     }

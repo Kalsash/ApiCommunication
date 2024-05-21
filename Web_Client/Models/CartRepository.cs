@@ -22,12 +22,9 @@ namespace Web_Client.Models
         //сохранить новую либо обновить существующую запись в БД
         public int AddDish(Dish entity)
         {
-            if (entity.Id == default)
-                context.Entry(entity).State = EntityState.Added;
-            else
-                context.Entry(entity).State = EntityState.Modified;
+            entity.Id = default;
+            context.Entry(entity).State = EntityState.Added;
             context.SaveChanges();
-
             return entity.Id;
         }
 
