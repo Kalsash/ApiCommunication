@@ -22,7 +22,7 @@ internal class Program
     
     static async Task Main(string[] args)
     {
-        var token = System.IO.File.ReadAllText(@"C:\Users\Lutci\source\Repos\ApiCommunication\Telegram_bot_request_menu\TGToken.txt");
+        var token = System.IO.File.ReadAllText(@"../../../TGToken.txt");
 
         var receiverOptions = new ReceiverOptions
         {
