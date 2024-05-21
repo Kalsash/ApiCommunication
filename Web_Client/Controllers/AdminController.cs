@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text;
 using Web_Client.Models;
 
 namespace Web_Client.Controllers
@@ -9,6 +10,10 @@ namespace Web_Client.Controllers
     public class AdminController : Controller
     {
         public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult NewDish()
         {
             return View();
         }
@@ -32,35 +37,21 @@ namespace Web_Client.Controllers
                 }
             }
         }
-        //post
-        async public Task<string> AddNewDish(Dish d)
+        [HttpPost("/Admin/Test")]
+        async public Task<ActionResult> Test(string name, int price)
         {
+            var d = new Dish {Name = name, Price = price };
             var url = "http://localhost:8080/api/menu";
             using (HttpClient client = new HttpClient())
             {
-                //var d = new Dish({Name = "bebra", Price = 1123});
                 string json = JsonConvert.SerializeObject(d);
-                Console.WriteLine(json);
-
-                // Создайте экземпляр HttpContent, если вам нужно отправить данные в теле запроса.
-                // Например, для JSON:
-                // string json = "{\"key\":\"value\"}";
-                // StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                StringContent content = new StringContent(string.Empty); // Пустое тело запроса
-
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(url, content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var MenuRespone = await response.Content.ReadAsStringAsync();
-                    return MenuRespone;
-                }
-                else
-                {
-                    return $"Error: {response.StatusCode}";
-                }
             }
+            return RedirectToAction("Menu", "Home");
         }
+
+
 
 
 
