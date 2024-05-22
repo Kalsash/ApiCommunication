@@ -14,14 +14,17 @@ namespace Web_Client.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly CartRepository _cartRepository;
 
+        public static List<Dish> Dishes = new List<Dish>();
+
+        public int USER_ID = 1;
 
         public HomeController(ILogger<HomeController> logger, CartRepository cartRepository)
         {
             _logger = logger;
+            cartRepository.USER_ID = USER_ID;
             _cartRepository = cartRepository;
         }
 
-        public static List<Dish> Dishes = new List<Dish>(); 
 
 
         public IActionResult Index()
@@ -52,7 +55,7 @@ namespace Web_Client.Controllers
         public IActionResult Bag()
 
         {
-            var dishList = _cartRepository.GetDishes().OrderBy(d => d.Id).ToList();
+            var dishList = _cartRepository.GetDishes().OrderBy(d => d.Id);
             ViewBag.DishList = dishList;
             return  View("ShoppingCart");
         }
@@ -87,6 +90,7 @@ namespace Web_Client.Controllers
             {
                 if (selectedDishes.Contains(item.Id))
                 {
+                    item.UserId = USER_ID;
                     _cartRepository.AddDish(item);
                 }
             }

@@ -8,14 +8,24 @@ namespace Web_Client.Models
     {
         //класс-репозиторий напрямую обращается к контексту базы данных
         private readonly ApplicationContext context;
+
+        public  int USER_ID = 1;
         public CartRepository(ApplicationContext context)
         {
             this.context = context;
         }
         //выбрать все записи из таблицы Articles
-        public IQueryable<Dish> GetDishes()
+        public List<Dish> GetDishes()
         {
-            return context.ShoppingCart.OrderBy(x => x.Name);
+            var lst = new List<Dish>();
+            foreach (var item in context.ShoppingCart)
+            {
+                if (item.UserId == USER_ID)
+                {
+                    lst.Add(item);
+                }
+            }
+            return lst;
         }
 
 
