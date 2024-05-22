@@ -4,7 +4,9 @@ namespace Web_Client.Models
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Cart> ShoppingCart { get; set; } = null!;
+        public DbSet<Dish> ShoppingCart { get; set; } = null!;
+
+        public DbSet<Cart> CartList { get; set; } = null!;
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
         : base(options)
@@ -15,7 +17,7 @@ namespace Web_Client.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cart>().HasData(
-                    new Cart { Id = 1, Id_u = 1, Id_m = "1;3"});               
+                    new Cart { Id = 1, Id_u = 1, ShoppingCart = new List<Dish>()});               
         }
     }
 

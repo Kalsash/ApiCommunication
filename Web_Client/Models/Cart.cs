@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public int Id_u { get; set; }
-        public string Id_m { get; set; }
+        public List<Dish> ShoppingCart { get; set; } = new();
     }
 }

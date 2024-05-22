@@ -13,8 +13,6 @@ builder.Services.AddTransient<CartRepository>();
 
 var app = builder.Build();
 
-app.MapGet("/Cart", (ApplicationContext db) => db.ShoppingCart.ToList());
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
