@@ -29,7 +29,7 @@ namespace Web_Client.Controllers
             return View();
         }
 
-        async public Task<List<Dish>> MenuTest()
+        async public Task<List<Dish>> MenuResponse()
         {
             var url = "http://localhost:8080/api/menu";
             using (HttpClient client = new HttpClient())
@@ -72,7 +72,7 @@ namespace Web_Client.Controllers
         [HttpGet]
         public IActionResult Menu()
         {
-            var MenuRespone = MenuTest();
+            var MenuRespone = MenuResponse();
             var DishList = MenuRespone.Result;
             ViewBag.DishList = DishList;
             Dishes = DishList;

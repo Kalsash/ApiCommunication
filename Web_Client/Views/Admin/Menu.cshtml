@@ -1,0 +1,16 @@
+﻿<h1 class="text-center">Menu</h1>
+
+<form method="post" asp-controller="Admin" asp-action="MenuDelete" style="margin-bottom: 20px">
+    @{
+        int i = 1;
+        foreach (Dish d in ViewBag.DishList)
+        {
+            <p>
+                <input type="checkbox" name="selectedDishes" value="@d.Id" /> @i. @d.Name ....................................................................... @d.Price rub.
+            </p>
+            i++;
+        }
+    }
+    <input type="submit" value="Удалить выбранные блюда из меню"/>
+
+</form>

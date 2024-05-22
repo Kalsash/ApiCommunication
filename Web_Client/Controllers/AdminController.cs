@@ -9,6 +9,7 @@ namespace Web_Client.Controllers
 {
     public class AdminController : Controller
     {
+        public static List<Dish> Dishes = new List<Dish>();
         public IActionResult Index()
         {
             return View();
@@ -17,9 +18,16 @@ namespace Web_Client.Controllers
         {
             return View();
         }
+        public IActionResult Menu()
+        {
+            var MenuRespone = MenuResponse();
+            var DishList = MenuRespone.Result;
+            ViewBag.DishList = DishList;
+            Dishes = DishList;
+            return View();
+        }
 
-
-        async public Task<string> Menu()
+        async public Task<List<Dish>> MenuResponse()
         {
             var url = "http://localhost:8080/api/menu";
             using (HttpClient client = new HttpClient())
@@ -29,16 +37,32 @@ namespace Web_Client.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var MenuRespone = await response.Content.ReadAsStringAsync();
-                    return MenuRespone;
+                    return JsonConvert.DeserializeObject<List<Dish>>(MenuRespone);
                 }
                 else
                 {
-                    return $"Error: {response.StatusCode}";
+                    return new List<Dish>();
                 }
             }
         }
-        [HttpPost("/Admin/Test")]
-        async public Task<ActionResult> Test(string name, int price)
+        // DELETE api/menu/5
+        //[HttpDelete("{id}")]
+        [HttpPost("/Admin/Delete")]
+        async public Task<IActionResult> MenuDelete(List<int> selectedDishes)
+        {
+            foreach (var dishId in selectedDishes)
+            {
+                var url = $"http://localhost:8080/api/menu/{dishId}";
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.DeleteAsync(url);
+                }
+            }
+            return RedirectToAction("Menu", "Admin");
+        }
+
+        [HttpPost("/Admin/MenuAdd")]
+        async public Task<ActionResult> MenuAdd(string name, int price)
         {
             var d = new Dish {Name = name, Price = price };
             var url = "http://localhost:8080/api/menu";
@@ -48,7 +72,7 @@ namespace Web_Client.Controllers
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(url, content);
             }
-            return RedirectToAction("Menu", "Home");
+            return RedirectToAction("Menu", "Admin");
         }
 
 
