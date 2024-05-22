@@ -27,12 +27,19 @@ namespace Web_Client.Models
             context.SaveChanges();
             return entity.Id;
         }
-
-        //удалить существующую запись
-        public void DeleteDish(Dish entity)
+        //удаление товаров из корзины
+        public void DeleteDish(int id)
         {
-            context.ShoppingCart.Remove(entity);
-            context.SaveChanges();
+            // находим блюдо в корзине по идентификатору
+            Dish dish = context.ShoppingCart.FirstOrDefault(d => d.Id == id);
+
+            // удаляем выбранное блюдо из корзины
+            if (dish != null)
+            {
+                context.ShoppingCart.Remove(dish);
+                context.SaveChanges();
+            }
         }
     }
+
 }

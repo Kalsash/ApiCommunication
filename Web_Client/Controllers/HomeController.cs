@@ -21,9 +21,6 @@ namespace Web_Client.Controllers
             _cartRepository = cartRepository;
         }
 
-
-        //public static List<Dish> shoppingCart = new List<Dish>();
-
         public static List<Dish> Dishes = new List<Dish>(); 
 
 
@@ -52,11 +49,25 @@ namespace Web_Client.Controllers
         }
 
         //корзина покупок
-        public List<Dish> Bag()
+        public IActionResult Bag()
+
         {
-            return _cartRepository.GetDishes().ToList();
+            var dishList = _cartRepository.GetDishes().OrderBy(d => d.Id).ToList();
+            ViewBag.DishList = dishList;
+            return  View("ShoppingCart");
         }
 
+        //удаление из корзины покупок
+        [HttpPost]
+        public IActionResult DeleteFromBag(List<int> selectedDishes)
+        {
+            // удаляем выбранные блюда из корзины
+            foreach (int id in selectedDishes)
+            {
+                _cartRepository.DeleteDish(id);
+            }
+            return Bag();
+        }
 
         [HttpGet]
         public IActionResult Menu()

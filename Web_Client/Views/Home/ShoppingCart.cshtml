@@ -1,0 +1,25 @@
+﻿<h1 class="text-center">Bag list</h1>
+
+<form method="post" asp-controller="Home" asp-action="Bag" style="margin-bottom: 20px">
+    @{
+        int i = 1;
+        foreach (Dish d in ViewBag.DishList)
+        {
+            <p>
+                <input type="checkbox" name="selectedDishes" value="@d.Id" /> @i. @d.Name ....................................................................... @d.Price rub.
+            </p>
+            i++;
+        }
+    }
+    <input type="submit" value="Удалить выбранные блюда из корзины" formaction="@Url.Action("DeleteFromBag", "Home")" />
+
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        // сортируем элементы .dish-item по возрастанию идентификаторов
+        $('.dish-item').sort(function (a, b) {
+            return $(a).find('input').val() - $(b).find('input').val();
+        }).appendTo('form');
+    });
+</script>
