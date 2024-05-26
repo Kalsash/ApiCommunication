@@ -48,19 +48,19 @@ namespace UsersApi.Controllers
 		}
 
 		// PUT api/users/5
-		[HttpPut("{id}")]
-		public async Task<IActionResult> PutUser(int id, User user)
-		{
-			if (id != user.Id)
-			{
-				return BadRequest();
-			}
+		//[HttpPut("{id}")]
+		//public async Task<IActionResult> PutUser(int id, User user)
+		//{
+		//	if (id != user.Id)
+		//	{
+		//		return BadRequest();
+		//	}
 
-			_context.Entry(user).State = EntityState.Modified;
-			await _context.SaveChangesAsync();
+		//	_context.Entry(user).State = EntityState.Modified;
+		//	await _context.SaveChangesAsync();
 
-			return NoContent();
-		}
+		//	return NoContent();
+		//}
 
 		// DELETE api/users/5
 		[HttpDelete("{id}")]

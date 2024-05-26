@@ -19,7 +19,7 @@ namespace UsersApi.Services
 		{
 			var listReply = new ListReply();    // определяем список
 												// преобразуем каждый объект User в объект UserReply
-			var userList = db.Users.Select(item => new UserReply { Id = item.Id, Name = item.Name, Phone = item.Phone, Address = item.Address }).ToList();
+			var userList = db.Users.Select(item => new UserReply { Name = item.Name, Phone = item.Phone, Address = item.Address }).ToList();
 			listReply.Users.AddRange(userList);
 			return Task.FromResult(listReply);
 		}
@@ -32,7 +32,7 @@ namespace UsersApi.Services
 			{
 				throw new RpcException(new Status(StatusCode.NotFound, "User not found"));
 			}
-			UserReply userReply = new UserReply() { Id = user.Id, Name = user.Name, Phone = user.Phone, Address = user.Address };
+			UserReply userReply = new UserReply() { Name = user.Name, Phone = user.Phone, Address = user.Address };
 			return await Task.FromResult(userReply);
 		}
 		// добавление пользователя
@@ -42,7 +42,7 @@ namespace UsersApi.Services
 			var user = new User { Name = request.Name, Phone = request.Phone, Address = request.Address };
 			await db.Users.AddAsync(user);
 			await db.SaveChangesAsync();
-			var reply = new UserReply() { Id = user.Id, Name = user.Name, Phone = user.Phone, Address = user.Address };
+			var reply = new UserReply() { Name = user.Name, Phone = user.Phone, Address = user.Address };
 			return await Task.FromResult(reply);
 		}
 		// обновление пользователя
@@ -58,7 +58,7 @@ namespace UsersApi.Services
 			user.Phone = request.Phone;
 			user.Address = request.Address;
 			await db.SaveChangesAsync();
-			var reply = new UserReply() { Id = user.Id, Name = user.Name, Phone = user.Phone, Address = user.Address };
+			var reply = new UserReply() { Name = user.Name, Phone = user.Phone, Address = user.Address };
 			return await Task.FromResult(reply);
 		}
 		// удаление пользователя
@@ -72,7 +72,7 @@ namespace UsersApi.Services
 			// удаляем пользователя из бд
 			db.Users.Remove(user);
 			await db.SaveChangesAsync();
-			var reply = new UserReply() { Id = user.Id, Name = user.Name, Phone = user.Phone, Address = user.Address };
+			var reply = new UserReply() { Name = user.Name, Phone = user.Phone, Address = user.Address };
 			return await Task.FromResult(reply);
 		}
 	}
