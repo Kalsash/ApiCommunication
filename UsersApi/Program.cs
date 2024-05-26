@@ -15,10 +15,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 var configuration = builder.Configuration;
 
-//builder.Services.AddDbContext<UserContext>(options =>
-//	options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
+builder.Services.AddDbContext<UserContext>(options =>
+    options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+//string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
+
 builder.Services.AddAuthorization();
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<UserContext>();
